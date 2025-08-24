@@ -26,9 +26,11 @@ INJURY_IMG = "bin/injury.png"
 
 FLAG_IMG = "bin/flag.png"
 MINE_IMG = "bin/mine.png"
-GRASS_IMG = "bin/grass.png"
+BUSH_IMG = "bin/grass.png"
 EXPLOSION_IMG = "bin/explotion.png"
 
 # NUMBERS
 NUM_MINES = 20
 NUM_BUSHS = 20
+
+
