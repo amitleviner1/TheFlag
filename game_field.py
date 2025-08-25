@@ -32,14 +32,14 @@ def place_flag(board):
 
 def place_mines(board):
     cells = place_flag(board)
-    mine = []
+    mines = []
     for _ in range(consts.NUM_MINES):
         row = random.randint(0, consts.ROWS - 1)
         col = random.randint(0, consts.COLS - 3)
         for j in range(3):
             board[row][col + j] = MINE
-            mine.append((row, col + j))
-        cells.extend(mine)
+            mines.append((row, col + j))
+        cells.extend(mines)
     return cells
 
 def check_flag_touch(soldier_body, field):

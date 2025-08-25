@@ -31,6 +31,16 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     soldier.move_soldier(player, 0, 1)
 
+                elif event.key == pygame.K_RETURN:
+                    #  מציג רשת + מוקשים לשנייה אחת
+                    scr.draw_background(screen_manager)
+                    scr.draw_grid(screen_manager)
+                    scr.draw_mines(screen_manager, field["mine_cells"])
+
+                    pygame.display.flip()
+
+                    pygame.time.wait(1000)
+
         if not game_over:
             if game_field.check_mine_touch(soldier.get_feet_indices(player), field):
                 message = "Game Over! You hit a mine!"
