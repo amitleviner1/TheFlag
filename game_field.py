@@ -11,8 +11,11 @@ def create_game_field():
     place_mines(board)
     return {
         "board": board,
-        "flag_pos": flag_pos
+        "flag_pos": flag_pos,
+        "flag_cells": flag_cells,
+        "mine_cells": mine_cells
     }
+
 
 def place_flag(board):
     start_row = consts.ROWS - 3
@@ -20,7 +23,8 @@ def place_flag(board):
     for i in range(3):
         for j in range(4):
             board[start_row + i][start_col + j] = FLAG
-    return start_row, start_col
+            cells.append((start_row + i, start_col + j))
+    return cells
 
 def place_mines(board):
     for _ in range(consts.NUM_MINES):
@@ -28,3 +32,18 @@ def place_mines(board):
         c = random.randint(0, consts.COLS - 3)
         for j in range(3):
             board[r][c + j] = MINE
+            mine.append((r, c + j))
+        cells.extend(mine)
+    return cells
+
+def check_flag_touch(soldier_body, field):
+        for cell in soldier_body:
+            if cell in field["flag_cells"]:
+                return True
+        return False
+
+def check_mine_touch(soldier_feet, field):
+    for cell in soldier_feet:
+        if cell in field["mine_cells"]:
+            return True
+    return False
