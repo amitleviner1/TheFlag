@@ -1,4 +1,6 @@
 import random
+from inspect import stack
+
 import consts
 
 EMPTY = 0
@@ -7,17 +9,19 @@ FLAG = 2
 
 def create_game_field():
     board = [[EMPTY for _ in range(consts.COLS)] for _ in range(consts.ROWS)]
-    flag_pos = place_flag(board)
+    flag_cells= place_flag(board)
+    mine_cells = place_mines(board)
     place_mines(board)
+
     return {
         "board": board,
-        "flag_pos": flag_pos,
+        # "flag_pos": flag_pos,
         "flag_cells": flag_cells,
         "mine_cells": mine_cells
     }
 
-
 def place_flag(board):
+    cells = []
     start_row = consts.ROWS - 3
     start_col = consts.COLS - 4
     for i in range(3):
@@ -27,12 +31,14 @@ def place_flag(board):
     return cells
 
 def place_mines(board):
+    cells = place_flag(board)
+    mine = []
     for _ in range(consts.NUM_MINES):
-        r = random.randint(0, consts.ROWS - 1)
-        c = random.randint(0, consts.COLS - 3)
+        row = random.randint(0, consts.ROWS - 1)
+        col = random.randint(0, consts.COLS - 3)
         for j in range(3):
-            board[r][c + j] = MINE
-            mine.append((r, c + j))
+            board[row][col + j] = MINE
+            mine.append((row, col + j))
         cells.extend(mine)
     return cells
 
